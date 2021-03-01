@@ -59,18 +59,21 @@ namespace AsyncWinform.Model
         }
 
         //打印日志
-        public static void Log() 
+        public static void Log(string msg) 
         {
             try
             {
                 //string fileName = "log.txt";
-              
-                
+                var logFile = ConfigurationSettings.AppSettings[""].ToString();
+                using (StreamWriter sw = File.AppendText("LogFile"))
+                {
+                    sw.WriteLine($"{DateTime.Now.ToString()}:{msg}");
+                    sw.WriteLine($"*************************************");
+                }
             }
             catch (Exception ex)
             {
 
-                throw;
             }
         }
 
