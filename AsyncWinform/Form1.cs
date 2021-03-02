@@ -195,6 +195,8 @@ namespace AsyncWinform
             //foreach(var i in )
         }
 
+        
+
         /// <summary>
         /// 
         /// </summary>
@@ -202,33 +204,104 @@ namespace AsyncWinform
         /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
-            List<JsonModel> LogFile = HomeWorkClass.jsonModels();
-
-            var u = 0;
-
-            foreach (var i in LogFile) 
             {
-                Task.Run(() => 
+                List<JsonModel> LogFile = HomeWorkClass.jsonModels();
+
+                var u = 0;
+
+                foreach (var i in LogFile)
                 {
-                    var j = i;
-                    foreach (var ii in j.Exercise) 
+                    Task.Run(() =>
                     {
-                        if (u == 0)
+                        var j = i;
+                        foreach (var ii in j.Exercise)
+                        {
+                            if (u == 0)
+                            {
+                                lock (obj)
+                                {
+                                    HomeWorkClass.DebugColor(ii, ConsoleColor.Red);
+                                    if (u == 0)
+                                    {
+                                        Debug.WriteLine("天降雷霆灭世，天龙八部的故事就此结束。。。");
+                                        u++;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                HomeWorkClass.DebugColor(ii, ConsoleColor.Red);
+                            }
+                        }
+                    });
+                }
+            }
+
+            {
+                List<JsonModel> vs = new List<JsonModel>();
+
+                var u = 0;
+
+                foreach (var i in vs) 
+                {
+                    Task.Factory.StartNew(() => 
+                    {
+                        var j = i;
+                        var jjj = 0;
+                        foreach (var jj in j.Exercise) 
+                        {
+                            if (jjj == 0)
+                            {
+                                lock (obj) 
+                                {
+                                    HomeWorkClass.DebugColor(jj, ConsoleColor.Red);
+                                    if (u == 0)
+                                    {
+                                        Debug.WriteLine("拉开序幕");
+                                        u++;
+                                    }
+                                }
+                                jjj++;
+                            }
+                            else 
+                            {
+                                HomeWorkClass.DebugColor(jj, ConsoleColor.Red);
+                            }
+                        } 
+                    });
+                }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            List<JsonModel> vs = new List<JsonModel>();
+            var u = 0;
+            foreach (var mode in vs) 
+            {
+                Task.Factory.StartNew(() => 
+                {
+                    var jj = 0;
+                    var j = mode;
+                    foreach (var i in j.Exercise) 
+                    {
+                        if (jj == 3)
                         {
                             lock (obj) 
                             {
-                                HomeWorkClass.DebugColor(ii, ConsoleColor.Red);
+                                HomeWorkClass.DebugColor(i, ConsoleColor.Red);
                                 if (u == 0) 
                                 {
-                                    Debug.WriteLine("天降雷霆灭世，天龙八部的故事就此结束。。。");
+                                    Debug.WriteLine("拉开序幕");
                                     u++;
                                 }
                             }
                         }
                         else 
                         {
-                            HomeWorkClass.DebugColor(ii, ConsoleColor.Red);
+                            HomeWorkClass.DebugColor(i, ConsoleColor.Red);
                         }
+                        jj++;
                     }
                 });
             }

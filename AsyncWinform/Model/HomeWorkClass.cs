@@ -57,7 +57,7 @@ namespace AsyncWinform.Model
                     Console.ForegroundColor = consoleColor;
                     Debug.Write(i);
                 }
-                Console.WriteLine("");
+                //Console.WriteLine("");
             }
         }
 
