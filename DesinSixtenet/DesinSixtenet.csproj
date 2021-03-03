@@ -54,6 +54,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignModel\DesignOnemodel.cs" />
+    <Compile Include="SignModel\DesignTwoModel.cs" />
+    <Compile Include="SignModel\OneRun.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
