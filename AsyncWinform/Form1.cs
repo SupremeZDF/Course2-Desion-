@@ -306,5 +306,11 @@ namespace AsyncWinform
                 });
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            List<JsonModel> LogFile = HomeWorkClass.jsonModels();
+            List<Task> tasks = new List<Task>();
+        }
     }
 }

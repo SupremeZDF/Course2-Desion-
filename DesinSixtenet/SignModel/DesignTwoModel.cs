@@ -16,7 +16,7 @@ namespace DesinSixtenet.SignModel
         //单列模式
         public static void OnlyMode() 
         {
-
+            
         }
     }
 }
