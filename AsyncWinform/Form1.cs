@@ -62,7 +62,7 @@ namespace AsyncWinform
                 Debug.WriteLine($"完成所消耗时间{stopwatch.ElapsedMilliseconds}");
             });
 
-            taskFactory.StartNew(() => 
+            Task.Factory.StartNew(() => 
             {
                 Random random = new Random();
                 while (true)
@@ -73,6 +73,7 @@ namespace AsyncWinform
                         cancellationTokenSource.Cancel();
                         Debug.WriteLine("天降雷霆灭世，天龙八部的故事就此结束。。。");
                     }
+                    return;
                 }
             });
 
@@ -106,12 +107,210 @@ namespace AsyncWinform
 
         }
 
+        public readonly static object obj = new object();
+
         //获取json 
         private void button3_Click(object sender, EventArgs e)
         {
-            List<JsonModel> jsonModels = HomeWorkClass.jsonModels();
+            List<JsonModel> LogFile = HomeWorkClass.jsonModels();
+            List<Task> tasks = new List<Task>();
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            var j = 0;
+            //
+            foreach (var mode in LogFile) 
+            {
+                tasks.Add(Task.Run(() => 
+                {
 
+                    {
+                        //var jj = 0;
+                        //foreach (var i in mode.Exercise)
+                        //{
+                        //    if (jj == 0)
+                        //    {
+                        //        //Thread.Sleep(OneModelRun.GetRandomInt(1000, 5000));
+
+                        //        lock (obj)
+                        //        {
+                        //            HomeWorkClass.DebugColor(i, ConsoleColor.Red);
+                        //            jj++;
+                        //            if (j == 0)
+                        //            {
+                        //                Debug.WriteLine("拉开序幕");
+                        //            }
+                        //            j++;
+                        //        }
+
+                        //    }
+                        //    else
+                        //    {
+                        //        HomeWorkClass.DebugColor(i, ConsoleColor.Red);
+                        //    }
+
+                        //}
+                    }
+
+                    foreach (var log in mode.Exercise) 
+                    {
+                        if (j == 0) //第一次全部等 双判断锁
+                        {
+                            lock (obj) 
+                            {
+                                HomeWorkClass.DebugColor(log, ConsoleColor.Red);
+                                if (j == 0) 
+                                {
+                                    Debug.WriteLine("拉开序幕");
+                                    j++;
+                                }
+                            }
+                        }
+                        else 
+                        {
+                            HomeWorkClass.DebugColor(log, ConsoleColor.Red);
+                        }
+                        if (cancellationTokenSource.IsCancellationRequested) 
+                        {
+                            break;
+                        }
+                    }
+                }, cancellationTokenSource.Token));
+            }
+            Task.Factory.ContinueWhenAny(tasks.ToArray(),(s) => {
+                Debug.WriteLine("准备就绪");
+            }, cancellationTokenSource.Token);
+
+            Task.Factory.StartNew(() =>
+            {
+                Random random = new Random();
+                while (true)
+                {
+                    if (random.Next(2000, 2040) == 2019)
+                    {
+                        cancellationTokenSource.Cancel();
+                        Debug.WriteLine("天降雷霆灭世，天龙八部的故事就此结束。。。");
+                        return;
+                    }
+                }
+            });
             //foreach(var i in )
+        }
+
+        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button4_Click(object sender, EventArgs e)
+        {
+            {
+                List<JsonModel> LogFile = HomeWorkClass.jsonModels();
+
+                var u = 0;
+
+                foreach (var i in LogFile)
+                {
+                    Task.Run(() =>
+                    {
+                        var j = i;
+                        foreach (var ii in j.Exercise)
+                        {
+                            if (u == 0)
+                            {
+                                lock (obj)
+                                {
+                                    HomeWorkClass.DebugColor(ii, ConsoleColor.Red);
+                                    if (u == 0)
+                                    {
+                                        Debug.WriteLine("天降雷霆灭世，天龙八部的故事就此结束。。。");
+                                        u++;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                HomeWorkClass.DebugColor(ii, ConsoleColor.Red);
+                            }
+                        }
+                    });
+                }
+            }
+
+            {
+                List<JsonModel> vs = new List<JsonModel>();
+
+                var u = 0;
+
+                foreach (var i in vs) 
+                {
+                    Task.Factory.StartNew(() => 
+                    {
+                        var j = i;
+                        var jjj = 0;
+                        foreach (var jj in j.Exercise) 
+                        {
+                            if (jjj == 0)
+                            {
+                                lock (obj) 
+                                {
+                                    HomeWorkClass.DebugColor(jj, ConsoleColor.Red);
+                                    if (u == 0)
+                                    {
+                                        Debug.WriteLine("拉开序幕");
+                                        u++;
+                                    }
+                                }
+                                jjj++;
+                            }
+                            else 
+                            {
+                                HomeWorkClass.DebugColor(jj, ConsoleColor.Red);
+                            }
+                        } 
+                    });
+                }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            List<JsonModel> vs = new List<JsonModel>();
+            var u = 0;
+            foreach (var mode in vs) 
+            {
+                Task.Factory.StartNew(() => 
+                {
+                    var jj = 0;
+                    var j = mode;
+                    foreach (var i in j.Exercise) 
+                    {
+                        if (jj == 3)
+                        {
+                            lock (obj) 
+                            {
+                                HomeWorkClass.DebugColor(i, ConsoleColor.Red);
+                                if (u == 0) 
+                                {
+                                    Debug.WriteLine("拉开序幕");
+                                    u++;
+                                }
+                            }
+                        }
+                        else 
+                        {
+                            HomeWorkClass.DebugColor(i, ConsoleColor.Red);
+                        }
+                        jj++;
+                    }
+                });
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            List<JsonModel> LogFile = HomeWorkClass.jsonModels();
+            List<Task> tasks = new List<Task>();
         }
     }
 }

@@ -49,13 +49,16 @@ namespace AsyncWinform.Model
 
         public static void DebugColor(string msg,ConsoleColor consoleColor) 
         {
-            foreach(var i in msg.ToCharArray()) 
+            lock (FirstObj) 
             {
-                Thread.Sleep(30);
-                Console.ForegroundColor = consoleColor;
-                Debug.Write(i);
+                foreach (var i in msg.ToCharArray())
+                {
+                    Thread.Sleep(30);
+                    Console.ForegroundColor = consoleColor;
+                    Debug.Write(i);
+                }
+                //Console.WriteLine("");
             }
-            Console.WriteLine("");
         }
 
         //打印日志
@@ -64,11 +67,14 @@ namespace AsyncWinform.Model
             try
             {
                 //string fileName = "log.txt";
-                var logFile = ConfigurationSettings.AppSettings[""].ToString();
-                using (StreamWriter sw = File.AppendText("LogFile"))
+                lock (FastObj) 
                 {
-                    sw.WriteLine($"{DateTime.Now.ToString()}:{msg}");
-                    sw.WriteLine($"*************************************");
+                    var logFile = ConfigurationSettings.AppSettings["LogFile"].ToString();
+                    using (StreamWriter sw = File.AppendText(logFile))
+                    {
+                        sw.WriteLine($"{DateTime.Now.ToString()}:{msg}");
+                        sw.WriteLine($"*************************************");
+                    }
                 }
             }
             catch (Exception ex)

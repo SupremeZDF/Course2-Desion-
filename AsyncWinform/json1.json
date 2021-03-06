@@ -2,26 +2,26 @@
   {
     "Name": "A",
     "color": "A",
-    "Exercise": [ "1", "2", "3", "4" ]
+    "Exercise": [ "A1", "A2", "A3", "A4" ]
   },
   {
     "Name": "B",
     "color": "B",
-    "Exercise": [ "1", "2", "3", "4" ]
+    "Exercise": [ "B1", "B2", "B3", "B4" ]
   },
   {
     "Name": "C",
     "color": "C",
-    "Exercise": [ "1", "2", "3", "4" ]
+    "Exercise": [ "C1", "C2", "C3", "C4" ]
   },
   {
     "Name": "D",
     "color": "D",
-    "Exercise": [ "1", "2", "3", "4" ]
+    "Exercise": [ "D1", "D2", "D3", "D4" ]
   },
   {
     "Name": "E",
     "color": "E",
-    "Exercise": [ "1", "2", "3", "4" ]
+    "Exercise": [ "E1", "E2", "E3", "E4" ]
   }
 ]
