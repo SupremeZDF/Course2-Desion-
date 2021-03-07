@@ -12,6 +12,8 @@ using Unity;
 using DesinSixtenet.Ioc;
 using Unity.Lifetime;
 using System.Runtime.Remoting.Messaging;
+using System.Diagnostics;
+using System.Threading;
 
 namespace DesinSixtenet
 {
@@ -37,17 +39,7 @@ namespace DesinSixtenet
 
         private void button2_Click(object sender, EventArgs e)
         {
-            {
-                IUnityContainer unityContainer = new UnityContainer();
-                unityContainer.RegisterType(typeof(InstaceOne), typeof(A));
-                //var ban = unityContainer.Resolve(typeof(InstaceOne));
-                unityContainer.RegisterType(typeof(IocExercise), typeof(B));
-                unityContainer.RegisterType<InstaceOne, A>(new SingletonLifetimeManager()) ;
-                var I = unityContainer.Resolve(typeof(IocExercise));
-            }
-
-            { }
-
+          
             {
                 //IUnityContainer unityContainer = new UnityContainer();
                 //unityContainer.RegisterType(typeof(InstaceOne), typeof(A));
@@ -57,39 +49,78 @@ namespace DesinSixtenet
                 //var I = unityContainer.Resolve(typeof(IocExercise));
 
                 IOCCZuo iOCCZuo = new IOCCZuo();
-                iOCCZuo.RrgisterType<IocExercise, B>();
+                iOCCZuo.RrgisterType<IocExercise, B>(enumLifeCicle.Transfrom);
+                iOCCZuo.RrgisterType<C,C>(enumLifeCicle.Singlon);
+                iOCCZuo.RrgisterType<D,D>(enumLifeCicle.ThreadSinglon);
                 var d = iOCCZuo.Resove<IocExercise>();
+                var dd = iOCCZuo.Resove<IocExercise>();
             }
+
+            {
+                IUnityContainer unityContainer = new UnityContainer();
+                unityContainer.RegisterType(typeof(InstaceOne), typeof(A));
+                //var ban = unityContainer.Resolve(typeof(InstaceOne));
+                unityContainer.RegisterType(typeof(IocExercise), typeof(B));
+                unityContainer.RegisterType<InstaceOne, A>(new SingletonLifetimeManager());
+                var I = unityContainer.Resolve(typeof(IocExercise));
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             {
-                IUnityContainer unityContainer = new UnityContainer();
-                IUnityContainer unityContainers = new UnityContainer();
-                unityContainer.RegisterType<IocExercise, B>(new SingletonLifetimeManager());
-                unityContainers.RegisterType<IocExercise, B>(new SingletonLifetimeManager());
-                var d1 = unityContainer.CreateChildContainer();
-                var d2 = unityContainer.CreateChildContainer();
+                //CallContext.SetData();
+                //线程槽
+                var s = true;
+                for (var i = 0; i < 3; i++) 
+                {
+                    var h = i;
+                    Task.Run(() =>
+                    {
+                        var jj = h;
+                        CallContext.SetData($"{jj}",jj);
+                        while (s) 
+                        {
+                            
+                            Debug.WriteLine($"数字{jj}_{Thread.CurrentThread.ManagedThreadId}_值——{CallContext.GetData($"{jj}")}");
+                            Thread.Sleep(1500);
+                        }
+                        Debug.WriteLine($"数字_{jj}_{Thread.CurrentThread.ManagedThreadId}_值——{CallContext.GetData($"{1}")}");
+                        Debug.WriteLine($"数字_{jj}_{Thread.CurrentThread.ManagedThreadId}_值——{CallContext.GetData($"{3}")}");
+                        Debug.WriteLine($"数字_{jj}_{Thread.CurrentThread.ManagedThreadId}_值——{CallContext.GetData($"{2}")}");
+                    });
+                }
+                Task.Run(() =>
+                {
+                    Thread.Sleep(10000);
+                    s = false;
+                    Debug.WriteLine($"数字_4_{Thread.CurrentThread.ManagedThreadId}_值——{CallContext.GetData($"{1}")}");
+                    Debug.WriteLine($"数字_4_{Thread.CurrentThread.ManagedThreadId}_值——{CallContext.GetData($"{3}")}");
+                    Debug.WriteLine($"数字_4_{Thread.CurrentThread.ManagedThreadId}_值——{CallContext.GetData($"{2}")}");
+                });
+            }
+            {
+                //IUnityContainer unityContainer = new UnityContainer();
+                //IUnityContainer unityContainers = new UnityContainer();
+                //unityContainer.RegisterType<IocExercise, B>(new SingletonLifetimeManager());
+                //unityContainers.RegisterType<IocExercise, B>(new SingletonLifetimeManager());
+                //var d1 = unityContainer.CreateChildContainer();
+                //var d2 = unityContainer.CreateChildContainer();
 
-                var obj1 = d1.Resolve<IocExercise>();
-                var obj2 = d2.Resolve<IocExercise>();
-                var obj4 = unityContainer.Resolve<IocExercise>();
-                var obj5 = object.ReferenceEquals(obj1, obj2);
-                var obj6 = object.ReferenceEquals(obj2, obj4);
+                //var obj1 = d1.Resolve<IocExercise>();
+                //var obj2 = d2.Resolve<IocExercise>();
+                //var obj4 = unityContainer.Resolve<IocExercise>();
+                //var obj5 = object.ReferenceEquals(obj1, obj2);
+                //var obj6 = object.ReferenceEquals(obj2, obj4);
 
                 //var obj1 = unityContainer.Resolve<IocExercise>();
                 //var obj2 = unityContainers.Resolve<IocExercise>();
                 //var obj3 = object.ReferenceEquals(obj1,obj2);
 
                 //AsyncResult
-                Action action = new Action(() => { });
-                action.BeginInvoke(s=> { },null);
-         
-            }
-
-            {
-                //CallContext.SetData();
+                //Action action = new Action(() => { });
+                //action.BeginInvoke(s=> { },null);
             }
         }
     }

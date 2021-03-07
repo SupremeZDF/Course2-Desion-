@@ -31,7 +31,7 @@ namespace DesinSixtenet
 
     public class B : IocExercise
     {
-        public B() 
+        public B(C c) 
         {
 
         }

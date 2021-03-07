@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,13 +12,16 @@ namespace DesinSixtenet.Ioc
         private static Dictionary<string, LifeCicleIoc> keyValuePairs = new Dictionary<string, LifeCicleIoc>();
         public void RrgisterType<T, V>(enumLifeCicle enumLifeCicle = enumLifeCicle.Transfrom)
         {
-            keyValuePairs.Add(typeof(T).FullName,new LifeCicleIoc() {type = typeof(V),lifeEnum = enumLifeCicle });
+            keyValuePairs.Add(typeof(T).FullName, new LifeCicleIoc() { type = typeof(V), lifeEnum = enumLifeCicle });
         }
 
-       //单列
+        private readonly static object obj = new object();
+
+        private static int io = 0;
+        //单列
         private Dictionary<Type, object> keyValues = new Dictionary<Type, object>();
 
-        public T Resove<T>() 
+        public T Resove<T>()
         {
             {
                 //var t = keyValuePairs[typeof(T).FullName];
@@ -40,50 +44,118 @@ namespace DesinSixtenet.Ioc
             }
             {
                 var type = keyValuePairs[typeof(T).FullName];
-
+                var types = keyValuePairs[typeof(T).FullName];
                 var obj = default(T);
 
-                switch (type.lifeEnum) 
+                switch (type.lifeEnum)
                 {
                     case enumLifeCicle.Singlon:
-                        if (keyValues.ContainsKey(typeof(T)))
-                            { }
+                        if (io == 0)
+                        {
+                            lock (obj)
+                            {
+                                if (keyValues.ContainsKey(typeof(T)))
+                                {
+                                    obj = (T)keyValues[typeof(T)];
+                                }
+                                else
+                                {
+                                    obj = (T)ResoveObject(typeof(T));
+                                    keyValues.Add(typeof(T), obj);
+                                    io++;
+                                }
+                            }
+                        }
+                        else 
+                        {
+                            if (keyValues.ContainsKey(typeof(T)))
+                            {
+                                obj = (T)keyValues[typeof(T)];
+                            }
+                        }
+                       
                         ; break;
                     case enumLifeCicle.ThreadSinglon:
+                        //用线程槽保存 数据保存到线程
+                        var oh = CallContext.GetData(typeof(T).FullName);
+                        if (oh == null)
+                        {
+                            obj = (T)ResoveObject(typeof(T));
+                            CallContext.SetData(typeof(T).FullName, obj);
+                        }
+                        else
+                        {
+                            obj = (T)oh;
+                        }
 
                         ; break;
                     case enumLifeCicle.Transfrom:
-                        obj = (T)ResoveObject(type.type);
+                        obj = (T)ResoveObject(typeof(T));
                         ; break;
                 }
                 return obj;
             }
         }
 
-        //
-        public object ResoveObject(Type type) 
+        public object ResoveObject(Type type)
         {
-            //var t = keyValuePairs[type.GetType().FullName];
-            var g = type.GetConstructors();
+            //DesinSixtenet.IocExercise   //DesinSixtenet.IocExercise
+            var t = keyValuePairs[type.FullName];
+            var g = t.type.GetConstructors();
             var f = g.OrderByDescending(s => s.GetParameters().Length).FirstOrDefault();
+            //var obj = default(object);
             if (f.GetParameters().Length > 0)
             {
                 List<object> list = new List<object>();
                 foreach (var para in f.GetParameters())
                 {
-                    var paraType = para.ParameterType;
-                    if (keyValuePairs[para.ParameterType.FullName] != null) 
+                    var tt = keyValuePairs[para.ParameterType.FullName];
+                    var gg = tt.type;
+                    switch (tt.lifeEnum)
                     {
-                        paraType = keyValuePairs[para.ParameterType.FullName].type;
+                        case enumLifeCicle.Singlon:
+                            if (keyValues.ContainsKey(para.ParameterType))
+                            {
+                                list.Add(keyValues[para.ParameterType]);
+                            }
+                            else
+                            {
+                                var ds = ResoveObject(para.ParameterType);
+                                keyValues.Add(para.ParameterType, ds);
+                                list.Add(ds);
+                            }
+                           ; break;
+                        case enumLifeCicle.ThreadSinglon:
+                            //用线程槽保存 数据保存到线程
+                            var oh = CallContext.GetData(para.ParameterType.FullName);
+                            if (oh == null)
+                            {
+                                var ds = ResoveObject(para.ParameterType);
+                                CallContext.SetData(para.ParameterType.FullName, ds);
+                                list.Add(ds);
+                            }
+                            else
+                            {
+                                list.Add(oh);
+                            }
+                            ; break;
+                        case enumLifeCicle.Transfrom:
+                            list.Add(ResoveObject(para.ParameterType));
+                            ; break;
                     }
+                    //var paraType = para.ParameterType;
+                    //if (keyValuePairs[para.ParameterType.FullName] != null)
+                    //{
+                    //    paraType = keyValuePairs[para.ParameterType.FullName].type;
+                    //}
                     //var pValue = keyValuePairs[para.ParameterType.FullName];
-                    list.Add(ResoveObject(paraType));
+                    //list.Add(ResoveObject(paraType));
                 }
-                return Activator.CreateInstance(type, list.ToArray());
+                return Activator.CreateInstance(t.type, list.ToArray());
             }
             else
             {
-                return Activator.CreateInstance(type);
+                return Activator.CreateInstance(t.type);
             }
         }
     }
