@@ -52,6 +52,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\OneModel.cs" />
+    <Compile Include="Model\ThreeModelRun.cs" />
+    <Compile Include="Model\TwoModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

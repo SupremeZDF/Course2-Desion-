@@ -38,7 +38,13 @@ namespace CLRCore.Model
 
         public static void TwoRun()
         {
+            //享元内存分配 同一个变量
+            var i = "123";
+            var j = i; //享元内存分配 同一个字符串
+            j = "1dads"; //重新开辟一个内存 
 
+            //为什么字符串不可以变，开辟内存不浪费
+            //因为在堆上连续拜访，如果变化，会导致其他变量的全部移动 成本太高 还不如new个新的
         }
     }
 }
