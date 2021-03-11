@@ -51,9 +51,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\FourModelCache.cs" />
+    <Compile Include="Model\ICustomDictionnary.cs" />
     <Compile Include="Model\OneModel.cs" />
     <Compile Include="Model\ThreeModelRun.cs" />
     <Compile Include="Model\TwoModel.cs" />
+    <Compile Include="OneRun\OneCacheRun.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
