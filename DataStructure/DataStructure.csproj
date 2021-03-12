@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6E890026-55D8-439F-9D76-3054959DBAAC}</ProjectGuid>
+    <ProjectGuid>{751870F0-7F37-4050-B38C-5CDD8D9DDC86}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CLRCore</RootNamespace>
-    <AssemblyName>CLRCore</AssemblyName>
+    <RootNamespace>DataStructure</RootNamespace>
+    <AssemblyName>DataStructure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -51,12 +51,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\FourModelCache.cs" />
-    <Compile Include="Model\ICustomDictionnary.cs" />
-    <Compile Include="Model\OneModel.cs" />
-    <Compile Include="Model\ThreeModelRun.cs" />
-    <Compile Include="Model\TwoModel.cs" />
-    <Compile Include="OneRun\OneCacheRun.cs" />
+    <Compile Include="Modle\OneRunModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -85,10 +80,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{51611f88-6dbf-4d74-9b19-51de75edfd39}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
+    <Folder Include="Run\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCache", "MyCache\MyCache.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruanmou.BLL", "Ruanmou.BLL\Ruanmou.BLL.csproj", "{DC48F745-6BB4-45C0-B2F8-73D69BE1D75B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStructure", "DataStructure\DataStructure.csproj", "{751870F0-7F37-4050-B38C-5CDD8D9DDC86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{DC48F745-6BB4-45C0-B2F8-73D69BE1D75B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC48F745-6BB4-45C0-B2F8-73D69BE1D75B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC48F745-6BB4-45C0-B2F8-73D69BE1D75B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{751870F0-7F37-4050-B38C-5CDD8D9DDC86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{751870F0-7F37-4050-B38C-5CDD8D9DDC86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{751870F0-7F37-4050-B38C-5CDD8D9DDC86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{751870F0-7F37-4050-B38C-5CDD8D9DDC86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +75,7 @@ Global
 		{51611F88-6DBF-4D74-9B19-51DE75EDFD39} = {6A202494-4CBD-4A75-993E-838001BED8D8}
 		{800ABB86-1D35-442E-9612-FA0068C4127A} = {6A202494-4CBD-4A75-993E-838001BED8D8}
 		{DC48F745-6BB4-45C0-B2F8-73D69BE1D75B} = {6A202494-4CBD-4A75-993E-838001BED8D8}
+		{751870F0-7F37-4050-B38C-5CDD8D9DDC86} = {2B3845EC-EFA6-4B4E-86ED-8DE7BCC678F6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8295871-7099-4C3B-B0C8-8314EB07AF1D}

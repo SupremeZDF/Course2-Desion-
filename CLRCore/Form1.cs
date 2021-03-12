@@ -1,4 +1,6 @@
 ﻿using CLRCore.Model;
+using CLRCore.OneRun;
+using Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -160,6 +162,117 @@ namespace CLRCore
             }
 
             ICustomDictionnary.IFiveRun();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            {
+                try
+                {
+                    List<Task> task = new List<Task>();
+                    
+
+                    //初始化数据  ADD
+                    for (var i = 0; i < 5000; i++)
+                    {
+                        var j = i;
+                        task.Add(Task.Run(() =>
+                        {
+                            OneCacheRun.Add($"Add_{j}", new ModelDate()
+                            {
+                                cacheType = CacheType.Never,
+                                DeadLine = DateTime.Now.AddDays(1),
+                                Value = $"Add_{j}",
+                                TimeSpan = TimeSpan.FromMinutes(10)
+                            }) ;
+                        }));
+                    }
+                    //初始化数据  Remove
+                    for (var i = 0; i < 500; i++)
+                    {
+                        var j = i;
+                        task.Add(Task.Run(() =>
+                        {
+                            OneCacheRun.Remove($"Add_{j}");
+                        }));
+                    }
+                    //初始化数据  Get
+                    for (var i = 0; i < 500; i++)
+                    {
+                        var j = i;
+                        task.Add(Task.Run(() =>
+                        {
+                            OneCacheRun.Get($"Add_{j}");
+                        }));
+                    }
+                    //初始化数据  存在
+                    for (var i = 0; i < 500; i++)
+                    {
+                        var j = i;
+                        task.Add(Task.Run(() =>
+                        {
+                            OneCacheRun.FWData($"Add_{j}");
+                        }));
+                    }
+                    Task.WaitAll(task.ToArray());
+                }
+                catch (Exception ex )
+                {
+                    var r = ex.Message;
+                    throw;
+                }
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<Task> task = new List<Task>();
+
+                //初始化数据  ADD
+                for (var i = 0; i < 5000; i++)
+                {
+                    var j = i;
+                    task.Add(Task.Run(() =>
+                    {
+                        CacheManager.Add($"Add_{j}", $"Add_{j}");
+                    }));
+                }
+                //初始化数据  Remove
+                //for (var i = 0; i < 500; i++)
+                //{
+                //    var j = i;
+                //    task.Add(Task.Run(() =>
+                //    {
+                //        OneCacheRun.Remove($"Add_{j}");
+                //    }));
+                //}
+                ////初始化数据  Get
+                //for (var i = 0; i < 500; i++)
+                //{
+                //    var j = i;
+                //    task.Add(Task.Run(() =>
+                //    {
+                //        OneCacheRun.Get($"Add_{j}");
+                //    }));
+                //}
+                ////初始化数据  存在
+                //for (var i = 0; i < 500; i++)
+                //{
+                //    var j = i;
+                //    task.Add(Task.Run(() =>
+                //    {
+                //        OneCacheRun.FWData($"Add_{j}");
+                //    }));
+                //}
+                Task.WaitAll(task.ToArray());
+            }
+            catch (Exception ex)
+            {
+                var r = ex.Message;
+                throw;
+            }
         }
     }
 

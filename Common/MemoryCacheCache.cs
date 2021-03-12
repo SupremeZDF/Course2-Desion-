@@ -8,9 +8,15 @@ namespace Common
     /// <summary>
     /// MemoryCacheCache
     /// </summary>
-    public class MemoryCacheCache : ICache
+    public  class MemoryCacheCache : ICache
     {
         public MemoryCacheCache() { }
+
+        //public Name Name;
+
+        //public Name GetName { get; set; }
+
+        //public Name keyValuePairs { get { return new Name() { }; } }
 
         protected ObjectCache Cache
         {
@@ -28,6 +34,7 @@ namespace Common
         /// <returns></returns>
         public T Get<T>(string key)
         {
+            //var s = Cache;
             if (Cache.Contains(key))
             {
                 return (T)Cache[key];
@@ -51,6 +58,10 @@ namespace Common
         /// <param name="cacheTime">∑÷÷”</param>
         public void Add(string key, object data, int cacheTime = 30)
         {
+            //var a = Name;
+            //var b = GetName;
+            //b.Nmaes = "123";
+            //var c = keyValuePairs;
             if (data == null)
                 return;
 
@@ -120,4 +131,9 @@ namespace Common
                 Remove(item.Key);
         }
     }
+
+    //public class Name 
+    //{
+    //    public string Nmaes;
+    //}
 }

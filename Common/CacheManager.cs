@@ -9,7 +9,9 @@ namespace Common
     {
         #region Identity
         private CacheManager()
-        { }
+        {
+            
+        }
 
         private static ICache cache = null;
 
