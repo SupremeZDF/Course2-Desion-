@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruanmou.BLL", "Ruanmou.BLL\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStructure", "DataStructure\DataStructure.csproj", "{751870F0-7F37-4050-B38C-5CDD8D9DDC86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionDemo", "ExpressionDemo\ExpressionDemo\ExpressionDemo.csproj", "{E3200D65-E642-4664-B6A3-A306DCAEF269}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{751870F0-7F37-4050-B38C-5CDD8D9DDC86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{751870F0-7F37-4050-B38C-5CDD8D9DDC86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{751870F0-7F37-4050-B38C-5CDD8D9DDC86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3200D65-E642-4664-B6A3-A306DCAEF269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3200D65-E642-4664-B6A3-A306DCAEF269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3200D65-E642-4664-B6A3-A306DCAEF269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3200D65-E642-4664-B6A3-A306DCAEF269}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{800ABB86-1D35-442E-9612-FA0068C4127A} = {6A202494-4CBD-4A75-993E-838001BED8D8}
 		{DC48F745-6BB4-45C0-B2F8-73D69BE1D75B} = {6A202494-4CBD-4A75-993E-838001BED8D8}
 		{751870F0-7F37-4050-B38C-5CDD8D9DDC86} = {2B3845EC-EFA6-4B4E-86ED-8DE7BCC678F6}
+		{E3200D65-E642-4664-B6A3-A306DCAEF269} = {6A202494-4CBD-4A75-993E-838001BED8D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8295871-7099-4C3B-B0C8-8314EB07AF1D}
