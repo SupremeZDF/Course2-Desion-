@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Expression", "Expression", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expresions", "Expresions\Expresions.csproj", "{A8AAC035-2B00-4133-B807-ED279B149F19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionDemo", "ExpressionDemo\ExpressionDemo\ExpressionDemo.csproj", "{E3200D65-E642-4664-B6A3-A306DCAEF269}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{A8AAC035-2B00-4133-B807-ED279B149F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8AAC035-2B00-4133-B807-ED279B149F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8AAC035-2B00-4133-B807-ED279B149F19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3200D65-E642-4664-B6A3-A306DCAEF269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3200D65-E642-4664-B6A3-A306DCAEF269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3200D65-E642-4664-B6A3-A306DCAEF269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3200D65-E642-4664-B6A3-A306DCAEF269}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{DC48F745-6BB4-45C0-B2F8-73D69BE1D75B} = {6A202494-4CBD-4A75-993E-838001BED8D8}
 		{751870F0-7F37-4050-B38C-5CDD8D9DDC86} = {2B3845EC-EFA6-4B4E-86ED-8DE7BCC678F6}
 		{A8AAC035-2B00-4133-B807-ED279B149F19} = {ACF98676-E989-48F3-AC5A-EB6558F95FE9}
+		{E3200D65-E642-4664-B6A3-A306DCAEF269} = {6A202494-4CBD-4A75-993E-838001BED8D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8295871-7099-4C3B-B0C8-8314EB07AF1D}
