@@ -14,6 +14,8 @@ namespace AsyncWinform.Model
     public class HomeWorkClass
     {
 
+        public const string Nmae = "123";
+
         static HomeWorkClass() 
         {
             string totalPath = ConfigurationSettings.AppSettings["LogFile"].ToString();
@@ -39,7 +41,6 @@ namespace AsyncWinform.Model
         /// <returns></returns>
         public static List<JsonModel> jsonModels()
         {
-
             var config = ConfigurationSettings.AppSettings["jsonFile"].ToString();
             string file = File.ReadAllText(config);
             var jsonconvert = JsonConvert.DeserializeObject<List<JsonModel>>(file);
