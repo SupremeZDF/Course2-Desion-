@@ -19,9 +19,9 @@ namespace ExerCiseExpresions.ExpressionModel
         // 
         public static void ITwoRun() 
         {
-            Expression<Func<int, int, int>> expression = (m, n) => m * n - 2 + (m / n) * n + 2 * m;
+            Expression<Func<int, int, int>> expression = (m, n) => m * n - 2 - m;
             TwoExpressionExercise twoExpressionExercise = new TwoExpressionExercise();
-            var s = twoExpressionExercise.Visit(expression);
+            twoExpressionExercise.Modify(expression.Body);
         }
     }
 }

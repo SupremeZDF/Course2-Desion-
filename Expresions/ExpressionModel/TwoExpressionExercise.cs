@@ -14,33 +14,50 @@ namespace ExerCiseExpresions.ExpressionModel
 
         public void Modify(Expression node)
         {
-            Visit(node);
+            var vis = Visit(node);
             var ss = 1;
             string[] s = GetVs.ToArray();
             Debug.WriteLine(string.Concat(s));
         }
 
-        //public override Expression Visit(Expression node) 
+        //public override Expression Visit(Expression node)
         //{
-        //    var to = node.ToString();
-        //    Debug.WriteLine(to);
+        //    //var to = node.ToString();
+        //    //Debug.WriteLine(to);
         //    return base.Visit(node);
         //}
 
         //Expression<Func<int, int, int>> expression = (m, n) => m * n - 2 + (m / n) * n + 2*m;
+        //m * n - 2 - m
         protected override Expression VisitBinary(BinaryExpression node) 
         {
             if (node == null)
                 throw new ArgumentNullException("");
+            //var sub = node.Left;
+            //var sup = node.Right;
             GetVs.Push(")");
-            Visit(node.Right);
+            var sub = Visit(node.Right);
             GetVs.Push(node.NodeType.NodeTypeTostring());
-            Visit(node.Left);
+            var sup = Visit(node.Left);
             GetVs.Push("(");
+            if (node.NodeType == ExpressionType.Subtract)
+            {
+                return Expression.Add(sup, sub);
+            }
+            //base.VisitBinary(node);
+            //var bb = Expression.Subtract(sup , sup);
             return node;
         }
 
-        protected override Expression VisitParameter(ParameterExpression node) 
+        protected override Expression VisitMember(MemberExpression node) 
+        {
+            if (node == null)
+                throw new ArgumentNullException("");
+            GetVs.Push(node.Member.Name);
+            return node;
+        }
+
+        protected override Expression VisitParameter(ParameterExpression node)
         {
             if (node == null)
                 throw new ArgumentNullException("");

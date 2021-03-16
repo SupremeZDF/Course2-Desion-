@@ -52,7 +52,7 @@ namespace ExpressionDemo.Extend
 
             var left = visitor.Replace(expr1.Body);
             var right = visitor.Replace(expr2.Body);
-            var body = Expression.Or(left, right);
+            var body = Expression.Or(left, right);  
             return Expression.Lambda<Func<T, bool>>(body, newParameter);
         }
         public static Expression<Func<T, bool>> Not<T>(this Expression<Func<T, bool>> expr)

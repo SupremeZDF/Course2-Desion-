@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExerciseTool\OneExerciseTool.cs" />
+    <Compile Include="ExpressionModel\ConditionBuilderVisitor.cs" />
     <Compile Include="ExpressionModel\OneExpressionExercise.cs" />
     <Compile Include="ExpressionModel\OneModel.cs" />
     <Compile Include="ExpressionModel\OneModelClass.cs" />

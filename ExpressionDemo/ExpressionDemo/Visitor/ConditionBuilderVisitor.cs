@@ -20,21 +20,34 @@ namespace ExpressionDemo.Visitor
             return condition;
         }
 
+
+        //Expression<Func<People, bool>> lambda = x => x.Age > 5
+        //                                            && x.Id < 5//;
+        //                                            && x.Id == 3
+        //                                            && x.Name.StartsWith("1")
+        //                                            && x.Name.EndsWith("1")
+        //                                            && x.Name.Contains("1");
+
         /// <summary>
-        /// 二元表达式
+        /// 二元表达式 ((x.Age > 5) OrElse ((x.Name == "A") AndAlso (x.Id > 5))) x.Age > 5 || (x.Name == "A" && x.Id > 5)
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node"></param> 
         /// <returns></returns>
         protected override Expression VisitBinary(BinaryExpression node)
         {
             if (node == null) throw new ArgumentNullException("BinaryExpression");
 
-            this._StringStack.Push(")");
+            //this._StringStack.Push(")");
             base.Visit(node.Right);//解析右边
             this._StringStack.Push(" " + node.NodeType.ToSqlOperator() + " ");
             base.Visit(node.Left);//解析左边
-            this._StringStack.Push("(");
+            //this._StringStack.Push("(");
 
+            return node;
+        }
+
+        protected override Expression VisitParameter(ParameterExpression node) 
+        {
             return node;
         }
 
@@ -49,6 +62,8 @@ namespace ExpressionDemo.Visitor
             this._StringStack.Push(" [" + node.Member.Name + "] ");
             return node;
         }
+
+        
 
         /// <summary>
         /// 常量表达式
