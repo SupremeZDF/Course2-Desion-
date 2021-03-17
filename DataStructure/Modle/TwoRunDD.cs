@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DataStructure.Run;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,6 +98,7 @@ namespace DataStructure.Modle
                 foreach (var j in keyValuePairs1) 
                 {
                     var i = j;
+                    
                 }
 
                 SortedDictionary<string, string> keyValuePairs = new SortedDictionary<string, string>();
@@ -112,6 +115,28 @@ namespace DataStructure.Modle
             List<int> vs = new List<int>();
             IEnumerable enumerable;
             vs.Add(1);
+            //yield
+        }
+
+        public static void FourRun() 
+        {
+            OneRunDiDai<StuDent> oneRunDiDai = new Run.OneRunDiDai<StuDent>();
+            for (var i = 0; i < 10; i++) 
+            {
+                oneRunDiDai.Add(new StuDent { ID = i, Name = $"N_{i}", Age = $"A_{i}" });
+            }
+            var d = oneRunDiDai.GetEnumerator() ;
+            while (d.MoveNext()) 
+            {
+                Debug.WriteLine(d.Current.Name);
+            }
+
+            var s = ((IEnumerable)oneRunDiDai).GetEnumerator();
+
+            foreach (StuDent stuDent in oneRunDiDai) 
+            {
+                Debug.WriteLine(stuDent.Name);
+            }
         }
 
         public static async Task AA() 

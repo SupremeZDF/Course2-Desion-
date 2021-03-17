@@ -31,9 +31,14 @@ namespace DataStructure
             TwoRunDD.TwoRun();
         }
 
-        private  void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
              TwoRunDD.AA();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            TwoRunDD.FourRun();
         }
     }
 }
