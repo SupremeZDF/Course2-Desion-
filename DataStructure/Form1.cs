@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataStructure.Modle;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +27,13 @@ namespace DataStructure
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int[] vs = { };
+            TwoRunDD.TwoRun();
+        }
 
+        private  void button3_Click(object sender, EventArgs e)
+        {
+             TwoRunDD.AA();
         }
     }
 }
