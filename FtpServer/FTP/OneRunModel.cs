@@ -35,10 +35,10 @@ namespace FtpServer.FTP
 
             try
             {
-                serverIP = "192.168.131.162:2020";
+                serverIP = "192.168.31.66:2020";
                 userName = "supreme";
                 password = "123456";
-                uploadurl = "ftp://" + serverIP + "/" + Path.GetFileName(filename);
+                uploadurl = "ftp://" + serverIP + "/ImagePath/2020_12_12/" + Path.GetFileName(filename);
                 //创建 FTP 请求
                 ftpWebRequest = (FtpWebRequest)WebRequest.Create(uploadurl);
                 //获取或设置要发送到 FTP 服务器的命令。
@@ -51,7 +51,7 @@ namespace FtpServer.FTP
                 ftpWebRequest.Credentials = nc;
                 ftpWebRequest.KeepAlive = true;
                 ftpWebRequest.UseBinary = true;
-                //ftpWebRequest.UsePassive = true;
+                ftpWebRequest.UsePassive = true;
                 //ftpWebRequest.EnableSsl = true;
                 stream = ftpWebRequest.GetRequestStream();
                 using (fileStream = File.Open(filename, FileMode.Open)) 
@@ -60,10 +60,10 @@ namespace FtpServer.FTP
                     var length = 0;
                     do
                     {
-                        length = fileStream.Read(buffer, 0, buffer.Length);
-                        stream.Write(buffer, 0, length);
-                    } while (length == buffer.Length);
-                    fileStream.Close();
+                        length = fileStream.Read(buffer, 0,1024);
+                        stream.Write(buffer, 0, 1024);
+                    } while (length == 1024);
+                    //fileStream.Close();
                 }
                 ftpWebResponse = (FtpWebResponse)ftpWebRequest.GetResponse();
             }
@@ -172,7 +172,7 @@ namespace FtpServer.FTP
             string userName;
             string password;
             string url;
-            serverIP = "192.168.131.162:2020";
+            serverIP = "192.168.31.66:2020";
             userName = "supreme";
             password = "123456";
             url = "ftp://" + serverIP +  localFile;

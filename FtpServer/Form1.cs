@@ -20,7 +20,7 @@ namespace FtpServer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OneRunModel.FtpCheckDirectoryExist("/ImagePath/");
+            OneRunModel.UploadFileInFTP(@"C:\Users\27339\Desktop\1.jpg");
             //OneRunModel.UploadFileInFTP();
         }
     }
