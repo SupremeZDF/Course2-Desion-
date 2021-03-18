@@ -125,18 +125,27 @@ namespace DataStructure.Modle
             {
                 oneRunDiDai.Add(new StuDent { ID = i, Name = $"N_{i}", Age = $"A_{i}" });
             }
-            var d = oneRunDiDai.GetEnumerator() ;
-            while (d.MoveNext()) 
             {
-                Debug.WriteLine(d.Current.Name);
+                IEnumerable<StuDent> stuDents = oneRunDiDai;
+                var d = stuDents.GetEnumerator();
+                IEnumerable enumerable = oneRunDiDai;
+                var dd = enumerable.GetEnumerator();
             }
-
-            var s = ((IEnumerable)oneRunDiDai).GetEnumerator();
-
-            foreach (StuDent stuDent in oneRunDiDai) 
             {
-                Debug.WriteLine(stuDent.Name);
+                var d = oneRunDiDai.GetEnumerator();
+                while (d.MoveNext())
+                {
+                    Debug.WriteLine(d.Current.Name);
+                }
+
+                var s = ((IEnumerable)oneRunDiDai).GetEnumerator();
+
+                foreach (StuDent stuDent in oneRunDiDai)
+                {
+                    Debug.WriteLine(stuDent.Name);
+                }
             }
+           
         }
 
         public static async Task AA() 
