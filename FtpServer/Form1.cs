@@ -18,6 +18,7 @@ namespace FtpServer
             InitializeComponent();
         }
 
+        //Redis
         private void button1_Click(object sender, EventArgs e)
         {
             OneRunModel.UploadFileInFTP(@"C:\Users\27339\Desktop\1.jpg");
