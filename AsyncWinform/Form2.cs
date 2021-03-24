@@ -77,7 +77,7 @@ namespace AsyncWinform
             //await Async.GetName();
             ////Task.WaitAll(c);
             //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
-
+            //de
            ForeRun();
         }
 
