@@ -312,5 +312,10 @@ namespace AsyncWinform
             List<JsonModel> LogFile = HomeWorkClass.jsonModels();
             List<Task> tasks = new List<Task>();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -68,6 +69,52 @@ namespace AsyncWinform
             {
                 Debug.WriteLine(x);
             }
+        }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            //await Async.GetName();
+            ////Task.WaitAll(c);
+            //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+
+           ForeRun();
+        }
+
+        public async  Task OneRun() 
+        {
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            TwoRun();
+            //Task.WaitAll(c);
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+        }
+
+        public static async Task TwoRun() 
+        {
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            await Task.Run(()=> { });
+            await ThreeRun();
+            //Task.WaitAll(c);
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+        }
+
+        public static async Task ThreeRun()
+        {
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            ForeRun();
+            //Task.WaitAll(c);
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            //Thread thread = new Thread();
+        }
+
+        public static async  Task ForeRun()
+        {
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            await Async.GetName();
+            //Task.WaitAll(c);
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            //Thread thread = new Thread();
+            //return null;
         }
     }
 }
