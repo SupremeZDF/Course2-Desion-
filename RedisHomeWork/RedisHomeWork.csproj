@@ -67,9 +67,12 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedisService\RedisHashService.cs" />
+    <Compile Include="Test\RedisTest.cs" />
     <Compile Include="Tool\RedisBaseService.cs" />
     <Compile Include="Tool\RedisConfigTool.cs" />
     <Compile Include="Tool\RedisExtendService.cs" />
+    <Compile Include="Tool\RedisFactory.cs" />
     <Compile Include="Tool\Tool.cs" />
   </ItemGroup>
   <ItemGroup>

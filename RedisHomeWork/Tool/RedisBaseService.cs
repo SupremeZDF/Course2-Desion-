@@ -13,7 +13,7 @@ namespace RedisHomeWork.Tool
 
         public RedisBaseService() 
         {
-        
+            iClient = RedisFactory.GetClient();
         }
 
         ~RedisBaseService()
@@ -48,7 +48,17 @@ namespace RedisHomeWork.Tool
         {
             using (IRedisTransaction irt = this.iClient.CreateTransaction())
             {
-
+                try
+                {
+                    irt.QueueCommand(r => r.Set("key", 20));
+                    irt.QueueCommand(r => r.Increment("key", 1));
+                    irt.Commit(); // 提交事务
+                }
+                catch (Exception ex)
+                {
+                    irt.Rollback();
+                    throw ex;
+                }
             }
         }
 
